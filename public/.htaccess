@@ -8,6 +8,8 @@ RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
 # Umschreiberegeln für das Zend Framework
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^application(.*)$ index.zf2.php 
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule .* /index.zf1.php
 
 # Sicherheit: Verzeichnisse sollen nicht angezeigt werden
