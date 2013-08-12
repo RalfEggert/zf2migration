@@ -1,0 +1,14 @@
+# Umgebungsvariable definieren
+SetEnv APPLICATION_ENV development
+
+# Slash am Ende entfernen
+RewriteEngine  on
+RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
+
+# Umschreiberegeln für das Zend Framework
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* /index.php
+
+# Sicherheit: Verzeichnisse sollen nicht angezeigt werden
+Options -Indexes

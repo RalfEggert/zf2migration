@@ -1,0 +1,23 @@
+<h1><?php echo $this->translate('title_blog_admin_delete'); ?></h1>
+<table class="table table-data">
+<tbody>
+<tr>
+<th><?php echo $this->translate('label_blog_article_category')?></th>
+<td><?php echo $this->article->getCategory()->getName()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_blog_article_status')?></th>
+<td><?php echo $this->article->getStatus()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_blog_article_title')?></th>
+<td><?php echo $this->article->getTitle()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_blog_article_teaser')?></th>
+<td><?php echo $this->article->getTeaser()?></td>
+</tr>
+</tbody>
+</table>
+<?php echo $this->deleteForm; ?>
+<a href="<?php echo $this->url(array('module' => 'blog', 'controller' => 'admin', 'action' => 'index')); ?>" class="btn"><?php echo $this->translate('link_back_to_list'); ?></a>

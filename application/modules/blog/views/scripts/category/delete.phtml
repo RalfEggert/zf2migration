@@ -1,0 +1,11 @@
+<h1><?php echo $this->translate('title_blog_category_delete'); ?></h1>
+<table class="table table-data">
+<tbody>
+<tr>
+<th><?php echo $this->translate('label_blog_category_name')?></th>
+<td><?php echo $this->category->getName()?></td>
+</tr>
+</tbody>
+</table>
+<?php echo $this->deleteForm; ?>
+<a href="<?php echo $this->url(array('module' => 'blog', 'controller' => 'category', 'action' => 'index')); ?>" class="btn"><?php echo $this->translate('link_back_to_list'); ?></a>

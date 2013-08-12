@@ -1,0 +1,116 @@
+/* Google Font API */
+@import
+    url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300|Open+Sans:400)
+    ;
+
+@media all {
+    body {
+        font-family: "Open Sans", Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        padding-top: 70px;
+        padding-bottom: 40px;
+    }
+    footer {
+        background-color: #c7e1ba;
+        border-top: 1px solid #58923c;
+        border-bottom: 1px solid #58923c;
+        margin-top: 10px;
+        padding: 30px 0;
+        text-align: center;
+    }
+    .sidebar .well {
+        background-color: #628b61;
+        border-color: #205a20;
+        color: #f6e4cc;
+    }
+    .sidebar h3 {
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-family: "Open Sans Condensed", Arial, Helvetica, sans-serif;
+        font-weight: 700;
+    }
+    h1 {
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-top: 3px dotted #ccc;
+        border-bottom: 3px dotted #ccc;
+    }
+    a {
+        color: #397249;
+    }
+    p.description {
+        padding-top: 5px;
+    }
+    ul.errors {
+        color: #B94A48;
+        font-weight: bold;
+    }
+    .navbar-inner {
+        background-color: #9cb770;
+        background-image: -moz-linear-gradient(top, #c3db9b, #9cb770);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#c3db9b), to(#9cb770));
+        background-image: -webkit-linear-gradient(top, #c3db9b, #9cb770);
+        background-image: -o-linear-gradient(top, #c3db9b, #9cb770);
+        background-image: linear-gradient(to bottom, #c3db9b, #9cb770);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c3db9bff', endColorstr='#ff9cb770', GradientType=0);
+    }
+    .navbar .brand {
+        color: #397249;
+        text-shadow: none;
+    }
+    .navbar .nav > li > a {
+        color: #397249;
+        text-shadow: none;
+    }
+    .navbar .nav > .active > a {
+        background-color: #c7e1ba;
+    }
+    .pagination {
+        text-align: center;
+    }
+    .table thead {
+        background-color: #f0f0f0;
+    }
+    .table-data th {
+        width: 160px;
+    }
+    .control-group {
+        border-top: 1px solid #E5E5E5;
+    }
+    label {
+        font-weight: bold;
+    }
+    .controls pre {
+        margin-top: 20px;
+        font-size: 8px;
+        line-height: 9px;
+    }
+    .sidebar .control-group {
+        border-top: none;
+    }
+    .sidebar .form-actions {
+        border-top: none;
+        background: none;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        padding: 0px;
+    }
+    .sidebar input.span3 {
+        width: 186px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+    .sidebar input.span3 {
+        width: 132px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sidebar input.span3 {
+        width: 236px;
+    }
+}

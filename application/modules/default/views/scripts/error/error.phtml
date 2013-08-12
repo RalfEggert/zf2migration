@@ -1,0 +1,12 @@
+<h1><?php echo $this->translate('title_default_error_error'); ?></h1>
+<h2><?php echo $this->translate($this->message) ?></h2>
+<?php if (isset($this->exception)): ?>
+<h3><?php echo $this->translate('heading_default_error_exception'); ?></h3>
+<p><b><?php echo $this->translate('label_default_error_message')?>:</b> <?php echo $this->exception->getMessage() ?></p>
+<h3><?php echo $this->translate('heading_default_error_trace'); ?></h3>
+<pre><?php echo $this->exception->getTraceAsString() ?>
+</pre>
+<h3><?php echo $this->translate('heading_default_error_parameters'); ?></h3>
+<pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+</pre>
+<?php endif ?>

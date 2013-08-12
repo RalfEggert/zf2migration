@@ -1,0 +1,16 @@
+<h1><?php echo $this->article->getTitle(); ?></h1>
+<?php 
+    $this->headTitle(
+        $this->article->getTitle(), 
+        Zend_View_Helper_Placeholder_Container_Abstract::SET
+    );
+    $this->headMeta()->setName(
+        'description', 
+        substr(strip_tags($this->article->getTeaser()), 0, 150) . ' ...' 
+    );
+?>
+<div>
+<?php echo $this->showArticle($this->article, false, false); ?>
+<hr />
+<p><a href="<?php echo $this->url(array('module' => 'blog', 'controller' => 'index', 'action' => 'index'), 'default', true); ?>" class="btn"><?php echo $this->translate('link_blog_index_back'); ?></a></p>
+</div>

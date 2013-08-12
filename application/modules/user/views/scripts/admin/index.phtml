@@ -1,0 +1,31 @@
+<h1><?php echo $this->translate('title_user_admin_index'); ?></h1>
+<table class="table table-bordered table-striped table-hover">
+<thead>
+<tr>
+<th><?php echo $this->translate('label_user_user_name')?></th>
+<th><?php echo $this->translate('label_user_user_email')?></th>
+<th><?php echo $this->translate('label_user_user_status')?></th>
+<th><?php echo $this->translate('label_user_user_group')?></th>
+<th width="70" style="text-align: center">
+<a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'admin', 'action' => 'create')); ?>" title="<?php echo $this->translate('label_create'); ?>" class="btn btn-mini"><i class="icon-plus"></i></a>
+</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach ($this->userList as $user): ?>
+<tr>
+<td><?php echo $user->getName()?></td>
+<td><?php echo $user->getEmail()?></td>
+<td><?php echo $this->translate($user->getStatus())?></td>
+<td><?php echo $this->translate($user->getGroup())?></td>
+<td style="text-align: center">
+<a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'admin', 'action' => 'update', 'id' => $user->getId())); ?>" title="<?php echo $this->translate('label_update'); ?>" class="btn btn-mini"><i class="icon-pencil"></i></a>
+<a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'admin', 'action' => 'delete', 'id' => $user->getId())); ?>" title="<?php echo $this->translate('label_delete'); ?>" class="btn btn-mini"><i class="icon-trash"></i></a>
+</td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+<div class="box info center">
+<?php echo $this->paginate(array('module' => 'user', 'controller' => 'admin', 'action' => 'index'), $this->pageHandling); ?>
+</div>

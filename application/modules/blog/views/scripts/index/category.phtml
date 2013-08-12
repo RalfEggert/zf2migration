@@ -1,0 +1,22 @@
+<h1><?php echo $this->translate('title_blog_index_category', $this->category->getName()); ?></h1>
+<?php 
+    $this->headTitle(
+        $this->translate('title_blog_index_category', array($this->category->getName())), 
+        Zend_View_Helper_Placeholder_Container_Abstract::SET
+    );
+    $this->headMeta()->setName(
+        'description', 
+        $this->translate('description_blog_index_category', array($this->category->getName())) 
+    );
+?>
+<?php foreach($this->articleList as $article):?>
+<div>
+<?php echo $this->showArticle($article); ?>
+<p><a href="<?php echo $this->url(array('module' => 'blog', 'controller' => 'index', 'action' => 'show', 'id' => $article->getId())); ?>" class="btn"><?php echo $this->translate('link_blog_index_continue'); ?></a></p>
+<hr />
+</div>
+<?php endforeach; ?>
+<div class="box info center">
+<?php echo $this->paginate(array('module' => 'blog', 'controller' => 'index', 'action' => 'category', 'id' => $this->category->getId()), $this->pageHandling); ?>
+</div>
+<p><a href="<?php echo $this->url(array('module' => 'blog', 'controller' => 'index', 'action' => 'index'), 'default', true); ?>" class="btn"><?php echo $this->translate('link_blog_index_back'); ?></a></p>

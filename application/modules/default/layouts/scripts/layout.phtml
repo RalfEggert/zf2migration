@@ -1,0 +1,27 @@
+<?php echo $this->doctype() ?>
+<html lang="de">
+<head>
+<?php echo $this->headTitle() . "\n"; ?>
+<?php echo $this->headMeta() . "\n"; ?>
+<?php echo $this->headLink() . "\n"; ?>
+<?php echo $this->headScript() . "\n"; ?>
+<?php echo $this->headStyle() . "\n"; ?>
+</head>
+<body>
+<?php echo $this->layout()->header; ?>
+<div class="container">
+<div class="row">
+<div class="content span9">
+<?php echo $this->showMessages($this->messages); ?>
+<?php echo $this->layout()->content; ?>
+</div>
+<div class="sidebar span3">
+<?php echo $this->layout()->sidebar; ?>
+</div>
+</div>
+</div>
+<?php echo $this->layout()->footer; ?>
+<script src="/js/jquery-1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

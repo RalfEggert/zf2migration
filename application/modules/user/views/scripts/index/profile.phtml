@@ -1,0 +1,31 @@
+<h1><?php echo $this->translate('title_user_index_profile'); ?></h1>
+<table class="table table-data">
+<tbody>
+<tr>
+<th><?php echo $this->translate('label_user_user_status')?></th>
+<td><?php echo $this->user->getStatus()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_group')?></th>
+<td><?php echo $this->user->getGroup()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_name')?></th>
+<td><?php echo $this->user->getName()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_email')?></th>
+<td><?php echo $this->user->getEmail()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_website')?></th>
+<td><?php echo $this->user->getWebsite()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_text')?></th>
+<td><?php echo $this->user->getText()?></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'index', 'action' => 'update')); ?>" class="btn"><?php echo $this->translate('title_user_index_update'); ?></a>

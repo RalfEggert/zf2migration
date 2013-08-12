@@ -1,0 +1,23 @@
+<h1><?php echo $this->translate('title_user_admin_delete'); ?></h1>
+<table class="table table-data">
+<tbody>
+<tr>
+<th><?php echo $this->translate('label_user_user_status')?></th>
+<td><?php echo $this->user->getStatus()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_group')?></th>
+<td><?php echo $this->user->getGroup()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_name')?></th>
+<td><?php echo $this->user->getName()?></td>
+</tr>
+<tr>
+<th><?php echo $this->translate('label_user_user_email')?></th>
+<td><?php echo $this->user->getEmail()?></td>
+</tr>
+</tbody>
+</table>
+<?php echo $this->deleteForm; ?>
+<a href="<?php echo $this->url(array('module' => 'user', 'controller' => 'admin', 'action' => 'index')); ?>" class="btn"><?php echo $this->translate('link_back_to_list'); ?></a>
