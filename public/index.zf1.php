@@ -11,7 +11,7 @@
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application.zf1'));
 
 // Define path to project directory
 defined('PROJECT_PATH') || define(
@@ -24,7 +24,7 @@ defined('APPLICATION_ENV')
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
-    realpath(PROJECT_PATH . '/library'),
+    realpath(PROJECT_PATH . '/library.zf1'),
     get_include_path(),
 )));
 

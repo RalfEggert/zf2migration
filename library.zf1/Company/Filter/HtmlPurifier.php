@@ -34,7 +34,7 @@ class Company_Filter_HtmlPurifier implements Zend_Filter_Interface
     public function __construct()
     {
     	if (!class_exists('HTMLPurifier_Bootstrap', false)) {
-            require_once PROJECT_PATH . '/library/HTMLPurifier/HTMLPurifier/Bootstrap.php';
+            require_once PROJECT_PATH . '/library.zf1/HTMLPurifier/HTMLPurifier/Bootstrap.php';
             spl_autoload_register(array('HTMLPurifier_Bootstrap', 'autoload'));
     	}
     	$config = HTMLPurifier_Config::createDefault();
