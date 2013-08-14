@@ -1,0 +1,29 @@
+<?php
+    $this->navigation('navigation')->menu()->setUlClass('nav');
+    $this->navigation('navigation')->menu()->setPartial(array(
+        'layout/navigation.phtml', 'default'
+    ));
+?>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="brand" href="/"><?php echo $this->translate('title_website'); ?></a>
+<div class="nav-collapse collapse">
+<?php echo $this->navigation('navigation')->menu(); ?>
+<form class="navbar-form pull-right">
+<input class="span2" type="search" placeholder="<?php echo $this->translate('label_default_search_placeholder'); ?>" />
+<input class="btn" type="submit" value="<?php echo $this->translate('button_default_search'); ?>" />
+</form>
+<ul class="nav pull-right">
+<li><a href="<?php // echo $this->url(array('lang' => 'de')); ?>">de</a></li>
+<li><a href="<?php // echo $this->url(array('lang' => 'en')); ?>">en</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>

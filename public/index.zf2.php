@@ -1,7 +1,12 @@
 <?php
 /**
- * This makes our life easier when dealing with paths. Everything is relative
- * to the application root now.
+ * ZF2 migration
+ *
+ * Front-Controller file
+ *
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Copyright (c) 2013 Travello GmbH
  */
 chdir(dirname(__DIR__));
 
@@ -9,6 +14,9 @@ chdir(dirname(__DIR__));
 if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
     return false;
 }
+
+// Setup autoloading
+require 'init_autoloader.php';
 
 // Define path to application directory
 defined('APPLICATION_PATH')
@@ -23,8 +31,8 @@ defined('PROJECT_PATH') || define(
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-// Setup autoloading
-require 'init_autoloader.php';
+// add include path
+set_include_path(get_include_path() . ':' . PROJECT_PATH . '/library.zf1');
 
 // Run the application!
 Zend\Mvc\Application::init(require 'config/application.config.php')->run();
