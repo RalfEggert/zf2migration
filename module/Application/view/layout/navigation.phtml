@@ -1,0 +1,29 @@
+<ul class="nav">
+<?php $count = 0; ?>
+<?php foreach ($this->container as $page): ?>
+<?php /* @var $page Zend\Navigation\Page\Mvc */ ?>
+<?php if( ! $page->isVisible() || !$this->navigation()->accept($page)) continue; ?>
+<?php $hasChildren = $page->hasPages() ?>
+<?php if( ! $hasChildren): ?>
+<li>
+<a href="<?php echo $page->getHref() ?>"><?php echo $this->translate($page->getLabel()) ?></a>
+</li>
+<?php else: ?>
+<?php $id = str_replace('#', '', $page->getHref()); ?>
+<li id="<?php echo $id; ?>" class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo $page->getHref() ?>">
+<span><?php echo $this->translate($page->getLabel()) ?></span>
+</a>
+<ul class="dropdown-menu" id="<?php echo $page->getHref() ?>">
+<?php foreach($page->getPages() as $child): ?>
+<?php if( ! $child->isVisible() || !$this->navigation()->accept($child)) continue; ?>
+<li>
+<a href="<?php echo $child->getHref() ?>"><?php echo $this->translate($child->getLabel()) ?></a>
+</li>
+<?php endforeach ?>
+</ul>
+</li>
+<?php endif ?>
+<?php $count++; ?>
+<?php endforeach ?>
+</ul>

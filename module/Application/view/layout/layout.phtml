@@ -1,49 +1,55 @@
-<?php echo $this->doctype(); ?>
-
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
-
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
-
-        <!-- Scripts -->
-        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
-
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
-    </body>
+<?php
+$this->headTitle('Startseite');
+$this->headMeta()->setName('description', 'Mein ZF2 Blog wird migriert');
+$this->headMeta()->setCharset('utf-8');
+$this->headMeta()->appendName(
+    'viewport', 'width=device-width, initial-scale=1.0'
+);
+$this->headLink(array(
+    'rel'  => 'shortcut icon', 
+    'type' => 'image/vnd.microsoft.icon', 
+    'href' => $this->basePath() . '/img/favicon.ico'
+));
+$this->headLink()->appendStylesheet(
+    $this->basePath() . '/css/bootstrap.min.css', 'screen, print'
+);
+$this->headLink()->appendStylesheet(
+    $this->basePath() . '/css/styles.css', 'screen, print'
+);
+$this->headScript()->appendFile(
+    $this->basePath() . '/js/html5shiv.js', 'text/javascript', 
+    array('conditional' => 'lt IE 9')
+);
+$this->inlineScript()->appendFile(
+    $this->basePath() . '/js/jquery-1.9.1.min.js', 'text/javascript'
+);
+$this->inlineScript()->appendFile(
+    $this->basePath() . '/js/bootstrap.min.js', 'text/javascript'
+);
+?>
+<?php echo $this->doctype() ?>
+<html lang="de">
+<head>
+<?php echo $this->headTitle() . "\n"; ?>
+<?php echo $this->headMeta() . "\n"; ?>
+<?php echo $this->headLink() . "\n"; ?>
+<?php echo $this->headScript() . "\n"; ?>
+<?php echo $this->headStyle() . "\n"; ?>
+</head>
+<body>
+<?php echo $this->layout()->header; ?>
+<div class="container">
+<div class="row">
+<div class="content span9">
+<?php // echo $this->showMessages($this->messages); ?>
+<?php echo $this->layout()->content; ?>
+</div>
+<div class="sidebar span3">
+<?php echo $this->layout()->sidebar; ?>
+</div>
+</div>
+</div>
+<?php echo $this->layout()->footer; ?>
+<?php echo $this->inlineScript() ?>
+</body>
 </html>

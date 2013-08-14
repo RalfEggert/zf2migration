@@ -1,12 +1,13 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * ZF2 migration
  *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * Application module configuration
+ *
+ * @package    Application
+ * @author     Ralf Eggert <r.eggert@travello.de>
+ * @copyright  Copyright (c) 2013 Travello GmbH
  */
-
 return array(
     'router' => array(
         'routes' => array(
@@ -20,10 +21,6 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -57,17 +54,20 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+        'factories' => array(
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory'
+        ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'de',
         'translation_file_patterns' => array(
             array(
-                'type'     => 'gettext',
-                'base_dir' => __DIR__ . '/../language',
-                'pattern'  => '%s.mo',
+                'type'     => 'phparray',
+                'base_dir' => realpath(__DIR__ . '/../language'),
+                'pattern'  => '%s.php',
             ),
         ),
     ),
@@ -92,10 +92,58 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => array(
+        'invokables'=> array(
+            'date' => 'Application\View\Helper\Date',
+        ),
+    ),
+    
     // Placeholder for console routes
     'console' => array(
         'router' => array(
             'routes' => array(
+            ),
+        ),
+    ),
+    
+    'navigation' => array(
+        'default' => array(
+            'blog' => array(
+                'type'       => 'uri',
+                'label'      => 'title_blog_index_index',
+                'uri'        => '/de/blog',
+            ),
+            'about' => array(
+                'type'       => 'uri',
+                'label'      => 'title_default_about_index',
+                'uri'        => '/de/default/about',
+            ),
+            'user' => array(
+                'type'       => 'uri',
+                'label'      => 'title_user_index_index',
+                'uri'        => '/de/user',
+            ),
+            'admin' => array(
+                'type'       => 'uri',
+                'label'      => 'title_default_admin_index',
+                'uri'        => '#dropdown1',
+                'pages'      => array(
+                    'blog-admin' => array(
+                        'type'       => 'uri',
+                        'label'      => 'title_blog_admin_index',
+                        'uri'        => '/de/blog/admin',
+                    ),
+                    'blog-category' => array(
+                        'type'       => 'uri',
+                        'label'      => 'title_blog_category_index',
+                        'uri'        => '/de/blog/category',
+                    ),
+                    'user-admin' => array(
+                        'type'       => 'uri',
+                        'label'      => 'title_user_admin_index',
+                        'uri'        => '/de/user/admin',
+                    ),
+                ),
             ),
         ),
     ),
