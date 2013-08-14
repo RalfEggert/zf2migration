@@ -4,4 +4,9 @@ composer
 bin
 zendframework
 autoload.php
+<<<<<<< HEAD
 ZF2
+=======
+ZF2
+README.md
+>>>>>>> step2
