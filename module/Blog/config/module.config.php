@@ -9,33 +9,35 @@
  * @copyright  Copyright (c) 2013 Travello GmbH
  */
 return array(
-    'router' => array(
+    'router'          => array(
         'routes' => array(
-            'blog' => array(
-                'type' => 'Segment',
+            'blog'          => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/:lang/blog[/:page]',
-                    'defaults' => array(
+                    'route'       => '/:lang/blog[/:page]',
+                    'defaults'    => array(
                         '__NAMESPACE__' => 'Blog\Controller',
-                        'lang'   => 'de',
-                        'controller' => 'index',
-                        'action'     => 'index',
+                        'lang'          => 'de',
+                        'module'        => 'blog',
+                        'controller'    => 'index',
+                        'action'        => 'index',
                     ),
                     'constraints' => array(
-                        'lang'       => '(de|en)',
-                        'page'       => '[0-9]*',
+                        'lang' => '(de|en)',
+                        'page' => '[0-9]*',
                     ),
                 ),
             ),
-            'blog-admin' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/:lang/blog/:controller[/:action]',
-                    'defaults' => array(
+            'blog-admin'    => array(
+                'type'          => 'Segment',
+                'options'       => array(
+                    'route'       => '/:lang/blog/:controller[/:action]',
+                    'defaults'    => array(
                         '__NAMESPACE__' => 'Blog\Controller',
-                        'language'   => 'de',
-                        'controller' => 'admin',
-                        'action'     => 'index',
+                        'language'      => 'de',
+                        'module'        => 'blog',
+                        'controller'    => 'admin',
+                        'action'        => 'index',
                     ),
                     'constraints' => array(
                         'lang'       => '(de|en)',
@@ -44,23 +46,23 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(
+                'child_routes'  => array(
                     'page' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/page/:page',
+                            'route'       => '/page/:page',
                             'constraints' => array(
                                 'page' => '[0-9]*',
                             ),
-                            'defaults' => array(
+                            'defaults'    => array(
                                 'page' => '1',
                             ),
                         ),
                     ),
-                    'id' => array(
+                    'id'   => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/id/:id',
+                            'route'       => '/id/:id',
                             'constraints' => array(
                                 'id' => '[0-9]*',
                             ),
@@ -68,53 +70,56 @@ return array(
                     ),
                 ),
             ),
-            'blog-article' => array(
-                'type' => 'Segment',
+            'blog-article'  => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/:lang/beitrag/:url',
-                    'defaults' => array(
+                    'route'       => '/:lang/beitrag/:url',
+                    'defaults'    => array(
                         '__NAMESPACE__' => 'Blog\Controller',
-                        'language'   => 'de',
-                        'controller' => 'index',
-                        'action'     => 'show',
+                        'language'      => 'de',
+                        'module'        => 'blog',
+                        'controller'    => 'index',
+                        'action'        => 'show',
                     ),
                     'constraints' => array(
-                        'lang'       => '(de|en)',
-                        'url'        => '[a-z0-9-]*',
+                        'lang' => '(de|en)',
+                        'url'  => '[a-z0-9-]*',
                     ),
                 ),
             ),
             'blog-category' => array(
-                'type' => 'Segment',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/:lang/kategorie/:url[/:page]',
-                    'defaults' => array(
+                    'route'       => '/:lang/kategorie/:url[/:page]',
+                    'defaults'    => array(
                         '__NAMESPACE__' => 'Blog\Controller',
-                        'language'   => 'de',
-                        'controller' => 'index',
-                        'action'     => 'category',
+                        'language'      => 'de',
+                        'module'        => 'blog',
+                        'controller'    => 'index',
+                        'action'        => 'category',
                     ),
                     'constraints' => array(
-                        'lang'       => '(de|en)',
-                        'url'        => '[a-z0-9-]*',
-                        'page'       => '[0-9]*',
+                        'lang' => '(de|en)',
+                        'url'  => '[a-z0-9-]*',
+                        'page' => '[0-9]*',
                     ),
                 ),
             ),
-            'blog-user' => array(
-                'type' => 'Segment',
+            'blog-user'     => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/:lang/nutzer/:url[/:page]',
-                    'defaults' => array(
+                    'route'       => '/:lang/nutzer/:url[/:page]',
+                    'defaults'    => array(
                         '__NAMESPACE__' => 'Blog\Controller',
-                        'language'   => 'de',
-                        'controller' => 'index',
-                        'action'     => 'user',
+                        'language'      => 'de',
+                        'module'        => 'blog',
+                        'controller'    => 'index',
+                        'action'        => 'user',
                     ),
                     'constraints' => array(
-                        'lang'       => '(de|en)',
-                        'url'        => '[a-z0-9-]*',
-                        'page'       => '[0-9]*',
+                        'lang' => '(de|en)',
+                        'url'  => '[a-z0-9-]*',
+                        'page' => '[0-9]*',
                     ),
                 ),
             ),
@@ -126,14 +131,14 @@ return array(
             'Blog\Service\Category' => \Blog_Service_Category::getInstance(),
         ),
     ),
-    'controllers' => array(
+    'controllers'     => array(
         'factories' => array(
             'Blog\Controller\Index' => 'Blog\Controller\IndexControllerFactory',
             'Blog\Controller\Admin' => 'Blog\Controller\AdminControllerFactory',
         ),
     ),
-    'translator' => array(
-        'locale' => 'de',
+    'translator'      => array(
+        'locale'                    => 'de',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'phparray',
@@ -142,36 +147,70 @@ return array(
             ),
         ),
     ),
-    'view_manager' => array(
+    'view_manager'    => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
     ),
-    'view_helpers' => array(
+    'view_helpers'    => array(
         'invokables' => array(
             'showArticle' => 'Blog\View\Helper\ShowArticle'
+        ),
+    ),
+
+    'acl'             => array(
+        'guest'  => array(
+            'blog-index' => array(
+                'allow' => null
+            ),
+        ),
+        'editor' => array(
+            'blog-admin' => array(
+                'allow' => null,
+                'deny'  => array('delete'),
+            ),
+        ),
+        'admin'  => array(
+            'blog-index'    => array('allow' => null),
+            'blog-category' => array('allow' => null),
+            'blog-admin'    => array('allow' => null),
         ),
     ),
 
     'navigation'      => array(
         'default' => array(
             'blog'  => array(
-                'type'  => 'mvc',
-                'label' => 'title_blog_index_index',
-                'route' => 'blog',
-                'order' => 100,
+                'type'       => 'mvc',
+                'label'      => 'title_blog_index_index',
+                'route'      => 'blog',
+                'order'      => 100,
+                'module'     => 'blog',
+                'controller' => 'index',
+                'action'     => 'index',
+                'resource'   => 'blog-index',
+                'privilege'  => 'index',
             ),
             'admin' => array(
                 'pages' => array(
                     'blog-admin'    => array(
-                        'type'  => 'uri',
-                        'label' => 'title_blog_admin_index',
-                        'uri'   => '/de/blog/admin',
+                        'type'       => 'mvc',
+                        'order'      => '910',
+                        'label'      => 'title_blog_admin_index',
+                        'route'      => 'blog',
+                        'controller' => 'admin',
+                        'action'     => 'index',
+                        'resource'   => 'blog-admin',
+                        'privilege'  => 'index',
                     ),
                     'blog-category' => array(
-                        'type'  => 'uri',
-                        'label' => 'title_blog_category_index',
-                        'uri'   => '/de/blog/category',
+                        'type'       => 'mvc',
+                        'order'      => '920',
+                        'label'      => 'title_blog_category_index',
+                        'route'      => 'blog',
+                        'controller' => 'category',
+                        'action'     => 'index',
+                        'resource'   => 'blog-category',
+                        'privilege'  => 'index',
                     ),
                 ),
             ),

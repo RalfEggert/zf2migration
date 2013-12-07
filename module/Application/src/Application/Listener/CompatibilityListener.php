@@ -154,5 +154,22 @@ class CompatibilityListener implements ListenerAggregateInterface
         // add namespace for static filters
         \Zend_Filter::addDefaultNamespaces('Company_Filter');
         \Zend_Validate::addDefaultNamespaces('Company_Validate');
+
+        // get session options
+        $sessionOptions = $config->resources->session->toArray();
+
+        // configure session save handler
+        $saveHandlerClass = $sessionOptions['saveHandler']['class'];
+        $saveHandler = new $saveHandlerClass($sessionOptions['saveHandler']['options']);
+
+        // clear savehandler options
+        unset($sessionOptions['saveHandler']);
+
+        // configure session
+        \Zend_Session::setOptions($sessionOptions);
+        \Zend_Session::setSaveHandler($saveHandler);
+
+        // set acl and auth in service manager
+        $e->getApplication()->getServiceManager()->setService('User\Authentication', \Zend_Auth::getInstance());
     }
 }

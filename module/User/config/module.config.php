@@ -39,9 +39,12 @@ return array(
     ),
 
     'service_manager' => array(
+        'factories' => array(
+            'User\Acl' => 'User\Acl\AclFactory',
+        ),
         'services' => array(
-            'Zend\Auth'  => \Zend_Auth::getInstance(),
-            'User\Service\User'  => \User_Service_User::getInstance(),
+            'Zend\Auth'         => \Zend_Auth::getInstance(),
+            'User\Service\User' => \User_Service_User::getInstance(),
         ),
     ),
     'view_helpers' => array(
@@ -59,4 +62,52 @@ return array(
             ),
         ),
     ),
+
+    'acl' => array(
+        'guest'   => array(
+            'user-index' => array(
+                'allow' => array('index', 'login', 'forbidden', 'create'),
+            ),
+        ),
+        'reader' => array(
+            'user-index' => array(
+                'allow' => array('index', 'logout', 'forbidden', 'create'),
+            ),
+        ),
+        'admin'   => array(
+            'user-index' => array('allow' => null),
+            'user-admin' => array('allow' => null),
+        ),
+    ),
+
+    'navigation' => array(
+        'default' => array(
+            'user' => array(
+                'type'       => 'mvc',
+                'order'      => '300',
+                'label'      => 'title_user_index_index',
+                'route'      => 'user',
+                'module'     => 'user',
+                'controller' => 'index',
+                'action'     => 'index',
+                'resource'   => 'user-index',
+                'privilege'  => 'index',
+            ),
+            'admin' => array(
+                'pages'      => array(
+                    'user-admin' => array(
+                        'type'       => 'mvc',
+                        'order'      => '930',
+                        'label'      => 'title_user_admin_index',
+                        'route'      => 'user',
+                        'controller' => 'admin',
+                        'action'     => 'index',
+                        'resource'   => 'user-admin',
+                        'privilege'  => 'index',
+                    ),
+                ),
+            ),
+        ),
+    ),
+
 );

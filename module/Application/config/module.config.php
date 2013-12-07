@@ -16,9 +16,11 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                        'lang'       => 'de',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'module'        => 'application',
+                        'controller'    => 'index',
+                        'action'        => 'index',
+                        'lang'          => 'de',
                     ),
                 ),
             ),
@@ -27,6 +29,7 @@ return array(
                 'options'       => array(
                     'route'    => '/application',
                     'defaults' => array(
+                        'module'        => 'application',
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
@@ -108,6 +111,23 @@ return array(
         ),
     ),
 
+    'acl'             => array(
+        'guest'  => array(
+            'application-index' => array('allow' => null),
+            'application-error' => array('allow' => null),
+            'application-about' => array('allow' => null),
+        ),
+        'editor' => array(
+            'application-admin' => array('allow' => null),
+        ),
+        'admin'  => array(
+            'application-index' => array('allow' => null),
+            'application-error' => array('allow' => null),
+            'application-about' => array('allow' => null),
+            'application-admin' => array('allow' => null),
+        ),
+    ),
+
     'navigation'      => array(
         'default' => array(
             'about' => array(
@@ -123,16 +143,13 @@ return array(
                 'order' => 300,
             ),
             'admin' => array(
-                'type'  => 'uri',
-                'label' => 'title_default_admin_index',
-                'uri'   => '#dropdown1',
-                'order' => 400,
-                'pages' => array(
-                    'user-admin' => array(
-                        'type'  => 'uri',
-                        'label' => 'title_user_admin_index',
-                        'uri'   => '/de/user/admin',
-                    ),
+                'type'       => 'uri',
+                'order'      => '900',
+                'label'      => 'title_default_admin_index',
+                'uri'        => '#dropdown1',
+                'resource'   => 'application-admin',
+                'privilege'  => 'index',
+                'pages'      => array(
                 ),
             ),
         ),

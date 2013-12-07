@@ -12,6 +12,9 @@
  */
 namespace User;
 
+use User\Listener\AuthorizationListener;
+use Zend\Mvc\MvcEvent;
+
 /**
  * User module class
  *
@@ -19,6 +22,13 @@ namespace User;
  */
 class Module
 {
+    public function onBootstrap(MvcEvent $e)
+    {
+        // add authorization listener
+        $eventManager = $e->getApplication()->getEventManager();
+        $eventManager->attachAggregate(new AuthorizationListener());
+    }
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
