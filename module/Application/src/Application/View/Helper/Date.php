@@ -54,6 +54,11 @@ class Date extends AbstractHelper
                 $timeType = IntlDateFormatter::NONE;
                 break;
 
+            case 'timeonly':
+                $dateType = IntlDateFormatter::NONE;
+                $timeType = IntlDateFormatter::MEDIUM;
+                break;
+
             default:
             case 'medium':
                 $dateType = IntlDateFormatter::MEDIUM;

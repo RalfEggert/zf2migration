@@ -1,0 +1,11 @@
+<h1><?php echo $this->article->getTitle(); ?></h1>
+<div>
+    <?php echo $this->showArticle($this->article, false, false); ?>
+    <hr/>
+    <p>
+        <a href="<?php echo $this->url('blog', array(), true); ?>"
+           class="btn">
+            <?php echo $this->translate('link_blog_index_back'); ?>
+        </a>
+    </p>
+</div>

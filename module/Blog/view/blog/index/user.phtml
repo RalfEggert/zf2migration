@@ -1,0 +1,33 @@
+<h1>
+    <?php echo sprintf(
+        $this->translate('title_blog_index_user'),
+        $this->user->getName()
+    ); ?>
+</h1>
+<?php foreach ($this->articleList as $article): ?>
+    <div>
+        <?php echo $this->showArticle($article); ?>
+        <?php
+        $urlShow = $this->url(
+            'blog-article', array('url' => $article->getUrl()), true
+        );
+        ?>
+        <p>
+            <a href="<?php echo $urlShow; ?>" class="btn">
+                <?php echo $this->translate('link_blog_index_continue'); ?>
+            </a>
+        </p>
+        <hr/>
+    </div>
+<?php endforeach; ?>
+<div class="box info center">
+    <?php echo $this->paginate(
+        'blog-user', array('url' => $this->user->getUrl()), $this->pageHandling
+    ); ?>
+</div>
+<p>
+    <a href="<?php echo $this->url('blog', array(), true); ?>"
+       class="btn">
+        <?php echo $this->translate('link_blog_index_back'); ?>
+    </a>
+</p>
