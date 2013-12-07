@@ -18,6 +18,7 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
+                        'lang'       => 'de',
                     ),
                 ),
             ),
@@ -127,7 +128,7 @@ return array(
                 'uri'   => '#dropdown1',
                 'order' => 400,
                 'pages' => array(
-                    'user-admin'    => array(
+                    'user-admin' => array(
                         'type'  => 'uri',
                         'label' => 'title_user_admin_index',
                         'uri'   => '/de/user/admin',
