@@ -27,6 +27,47 @@ return array(
                     ),
                 ),
             ),
+            'blog-admin' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/:lang/blog/:controller[/:action]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Blog\Controller',
+                        'language'   => 'de',
+                        'controller' => 'admin',
+                        'action'     => 'index',
+                    ),
+                    'constraints' => array(
+                        'lang'       => '(de|en)',
+                        'controller' => '(admin|category)',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'page' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/page/:page',
+                            'constraints' => array(
+                                'page' => '[0-9]*',
+                            ),
+                            'defaults' => array(
+                                'page' => '1',
+                            ),
+                        ),
+                    ),
+                    'id' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/id/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'blog-article' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -88,6 +129,7 @@ return array(
     'controllers' => array(
         'factories' => array(
             'Blog\Controller\Index' => 'Blog\Controller\IndexControllerFactory',
+            'Blog\Controller\Admin' => 'Blog\Controller\AdminControllerFactory',
         ),
     ),
     'translator' => array(

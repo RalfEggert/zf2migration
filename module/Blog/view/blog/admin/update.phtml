@@ -1,0 +1,12 @@
+<?php
+$this->updateForm->setView(new Zend_View);
+
+$this->headScript()->appendFile('/js/ckeditor/ckeditor.js', 'text/javascript');
+?>
+<h1><?php echo $this->translate('title_blog_admin_update'); ?></h1>
+<?php echo $this->updateForm; ?>
+<a href="<?php echo $this->url(
+    'blog-admin', array('controller' => 'admin', 'action' => null), true
+); ?>" class="btn">
+    <?php echo $this->translate('link_back_to_list'); ?>
+</a>

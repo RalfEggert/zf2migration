@@ -425,7 +425,9 @@ class Blog_Service_Article
     
         // get data and add user
         $cleanData = $this->getForm('create')->getValues();
-        $cleanData['article_user'] = Zend_Auth::getInstance()->getIdentity()->getId();
+//        $cleanData['article_user'] = Zend_Auth::getInstance()->getIdentity()->getId();
+        $cleanData['article_user'] = 1;
+
     
         // try to create dataset
         try {
