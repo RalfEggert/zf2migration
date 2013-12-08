@@ -126,9 +126,27 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'services' => array(
+        'shared'     => array(
+            'Blog\Entity\Article'  => false,
+            'Blog\Entity\Category' => false,
+        ),
+        'invokables' => array(
+            'Blog\Entity\Article'  => 'Blog\Entity\ArticleEntity',
+            'Blog\Entity\Category' => 'Blog\Entity\CategoryEntity',
+        ),
+        'factories'  => array(
+            'Blog\Table\Article'  => 'Blog\Table\ArticleTableFactory',
+            'Blog\Table\Category' => 'Blog\Table\CategoryTableFactory',
+        ),
+        'services'   => array(
             'Blog\Service\Article'  => \Blog_Service_Article::getInstance(),
             'Blog\Service\Category' => \Blog_Service_Category::getInstance(),
+        ),
+    ),
+    'hydrators'       => array(
+        'invokables' => array(
+            'Blog\Hydrator\Article'  => 'Blog\Hydrator\ArticleHydrator',
+            'Blog\Hydrator\Category' => 'Blog\Hydrator\CategoryHydrator',
         ),
     ),
     'controllers'     => array(
@@ -157,7 +175,6 @@ return array(
             'showArticle' => 'Blog\View\Helper\ShowArticle'
         ),
     ),
-
     'acl'             => array(
         'guest'  => array(
             'blog-index' => array(
