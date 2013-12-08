@@ -53,8 +53,8 @@ $createUrl = $this->url(
                     <?php echo $article->getTitle() ?>
                 </a>
             </td>
-            <td><?php echo $article->getCategory()->getName() ?></td>
-            <td><?php echo $article->getUser()->getName() ?></td>
+            <td><?php echo $article->getCategory() ?></td>
+            <td><?php echo $article->getUser() ?></td>
             <td><?php echo $this->translate($article->getStatus()) ?></td>
             <td><?php echo $this->date($article->getDate()) ?></td>
             <td style="text-align: center">
@@ -71,8 +71,3 @@ $createUrl = $this->url(
     <?php endforeach; ?>
     </tbody>
 </table>
-<div class="box info center">
-    <?php echo $this->paginate(
-        'blog-admin/page', array('controller' => 'admin'), $this->pageHandling
-    ); ?>
-</div>

@@ -1,10 +1,8 @@
 <?php
-$this->createForm->setView(new Zend_View);
-
 $this->headScript()->appendFile('/js/ckeditor/ckeditor.js', 'text/javascript');
 ?>
 <h1><?php echo $this->translate('title_blog_admin_create'); ?></h1>
-<?php echo $this->createForm; ?>
+<?php echo $this->form($this->createForm); ?>
 <a href="<?php echo $this->url(
     'blog-admin', array('controller' => 'admin', 'action' => null), true
 ); ?>" class="btn">

@@ -12,6 +12,8 @@
  */
 namespace Blog\Controller;
 
+use Blog\Form\ArticleForm;
+use Blog\Service\ArticleService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -23,17 +25,13 @@ use Zend\View\Model\ViewModel;
 class AdminController extends AbstractActionController
 {
     /**
-     * @var \Blog_Service_Article
+     * @var ArticleForm
+     */
+    protected $articleForm = null;
+    /**
+     * @var ArticleService
      */
     protected $articleService = null;
-    /**
-     * @var \Blog_Service_Category
-     */
-    protected $categoryService = null;
-    /**
-     * @var \Blog_Service_User
-     */
-    protected $userService = null;
 
     /**
      * @param $articleService
@@ -41,13 +39,10 @@ class AdminController extends AbstractActionController
      * @param $userService
      */
     function __construct(
-        \Blog_Service_Article $articleService,
-        \Blog_Service_Category $categoryService,
-        \User_Service_User $userService
+        ArticleService $articleService, ArticleForm $articleForm
     ) {
         $this->setArticleService($articleService);
-        $this->setCategoryService($categoryService);
-        $this->setUserService($userService);
+        $this->setArticleForm($articleForm);
     }
 
     /**
@@ -73,8 +68,9 @@ class AdminController extends AbstractActionController
             );
         }
 
-        $createForm = $this->getArticleService()->getForm('create');
-        $createForm->setAction(
+        $createForm = $this->getArticleForm();
+        $createForm->setAttribute(
+            'action',
             $this->url()->fromRoute(
                 'blog-admin',
                 array('controller' => 'admin', 'action' => 'create'),
@@ -133,14 +129,30 @@ class AdminController extends AbstractActionController
 
         return new ViewModel(
             array(
-                'article'    => $article,
+                'article' => $article,
                 'deleteForm' => $deleteForm,
             )
         );
     }
 
     /**
-     * @return \Blog_Service_Article
+     * @return \Blog\Form\ArticleForm
+     */
+    public function getArticleForm()
+    {
+        return $this->articleForm;
+    }
+
+    /**
+     * @param \Blog\Form\ArticleForm $articleForm
+     */
+    public function setArticleForm($articleForm)
+    {
+        $this->articleForm = $articleForm;
+    }
+
+    /**
+     * @return ArticleService
      */
     public function getArticleService()
     {
@@ -148,43 +160,11 @@ class AdminController extends AbstractActionController
     }
 
     /**
-     * @param \Blog_Service_Article $articleService
+     * @param ArticleService $articleService
      */
     public function setArticleService($articleService)
     {
         $this->articleService = $articleService;
-    }
-
-    /**
-     * @return \Blog_Service_Category
-     */
-    public function getCategoryService()
-    {
-        return $this->categoryService;
-    }
-
-    /**
-     * @param \Blog_Service_Category $categoryService
-     */
-    public function setCategoryService($categoryService)
-    {
-        $this->categoryService = $categoryService;
-    }
-
-    /**
-     * @return \Blog_Service_User
-     */
-    public function getUserService()
-    {
-        return $this->userService;
-    }
-
-    /**
-     * @param \Blog_Service_User $userService
-     */
-    public function setUserService($userService)
-    {
-        $this->userService = $userService;
     }
 
     /**
@@ -196,19 +176,11 @@ class AdminController extends AbstractActionController
     {
         $page = $this->params()->fromRoute('page');
 
-        $articleList  = $this->getArticleService()->fetchListApproved($page);
-        $pageHandling = $this->getArticleService()->pageListApproved($page);
-
-        if (empty($articleList) && $page > 0) {
-            return $this->redirect()->toRoute(
-                'blog-admin', array('controller' => 'admin'), true
-            );
-        }
+        $articleList = $this->getArticleService()->fetchMany();
 
         return new ViewModel(
             array(
-                'articleList'  => $articleList,
-                'pageHandling' => $pageHandling,
+                'articleList' => $articleList,
             )
         );
     }
@@ -245,8 +217,12 @@ class AdminController extends AbstractActionController
             );
         }
 
-        $updateForm = $this->getArticleService()->getForm('update');
-        $updateForm->setAction(
+        $updateForm = $this->getArticleForm();
+        $updateForm->setData(
+            $this->getArticleService()->getHydrator()->extract($article)
+        );
+        $updateForm->setAttribute(
+            'action',
             $this->url()->fromRoute(
                 'blog-admin/id',
                 array(

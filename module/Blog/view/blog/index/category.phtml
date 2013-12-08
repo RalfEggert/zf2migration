@@ -20,12 +20,6 @@
         <hr/>
     </div>
 <?php endforeach; ?>
-<div class="box info center">
-    <?php echo $this->paginate(
-        'blog-category', array('url' => $this->category->getUrl()),
-        $this->pageHandling
-    ); ?>
-</div>
 <p>
     <a href="<?php echo $this->url('blog', array(), true); ?>"
        class="btn">

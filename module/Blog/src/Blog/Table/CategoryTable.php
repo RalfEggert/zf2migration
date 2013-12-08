@@ -74,7 +74,7 @@ class CategoryTable extends TableGateway
         $select = $this->getSql()->select();
         $select->order('category_name ASC');
 
-        return $this->selectWith($select)->current();
+        return $this->selectWith($select);
     }
 }
 

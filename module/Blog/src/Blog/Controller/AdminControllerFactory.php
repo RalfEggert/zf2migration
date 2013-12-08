@@ -31,14 +31,14 @@ class AdminControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $controllerLoader)
     {
-        $serviceLocator = $controllerLoader->getServiceLocator();
+        $serviceLocator     = $controllerLoader->getServiceLocator();
+        $formElementManager = $serviceLocator->get('FormElementManager');
 
-        $articleService  = $serviceLocator->get('Blog\Service\Article');
-        $categoryService = $serviceLocator->get('Blog\Service\Category');
-        $userService     = $serviceLocator->get('User\Service\User');
+        $articleService = $serviceLocator->get('Blog\Service\Article');
+        $articleForm    = $formElementManager->get('Blog\Form\Article');
 
         $controller = new AdminController(
-            $articleService, $categoryService, $userService
+            $articleService, $articleForm
         );
 
         return $controller;

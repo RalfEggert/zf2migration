@@ -12,6 +12,7 @@
  */
 namespace Blog\View\Helper;
 
+use Blog\Entity\ArticleEntity;
 use Zend\View\Helper\AbstractHelper;
 
 /**
@@ -22,18 +23,18 @@ use Zend\View\Helper\AbstractHelper;
 class ShowArticle extends AbstractHelper
 {
     function __invoke(
-        \Blog_Model_Article $article, $showTitle = true, $showTeaser = true
+        ArticleEntity $article, $showTitle = true, $showTeaser = true
     ) {
         $articleUrl  = $this->getView()->url(
             'blog-article', array('url' => $article->getUrl()), true
         );
-        $userUrl     = $this->getView()->url(
-            'blog-user', array('url' => $article->getUser()->getUrl()), true
-        );
-        $categoryUrl = $this->getView()->url(
-            'blog-category', array('url' => $article->getCategory()->getUrl()),
-            true
-        );
+//        $userUrl     = $this->getView()->url(
+//            'blog-user', array('url' => $article->getUser()->getUrl()), true
+//        );
+//        $categoryUrl = $this->getView()->url(
+//            'blog-category', array('url' => $article->getCategory()->getUrl()),
+//            true
+//        );
 
         if ($showTitle) {
             $output = '<h2><a href="' . $articleUrl . '">'
@@ -46,12 +47,14 @@ class ShowArticle extends AbstractHelper
         $output .= '<p><em>';
         $output .= sprintf(
             $this->getView()->translate('label_blog_written'),
-            ' <a href="' . $userUrl . '">' . $article->getUser()
-                ->getName() . '</a>',
+//            ' <a href="' . $userUrl . '">' . $article->getUser()
+//                ->getName() . '</a>',
+            'User',
             $this->getView()->date($article->getDate(), 'dateonly'),
             $this->getView()->date($article->getDate(), 'timeonly'),
-            '<a href="' . $categoryUrl . '">' . $article->getCategory()
-                ->getName() . '</a>'
+//            '<a href="' . $categoryUrl . '">' . $article->getCategory()
+//                ->getName() . '</a>'
+            'Kategorie'
         );
         $output .= '</em></p>';
         $output .= $showTeaser ? $article->getTeaser() : $article->getText();

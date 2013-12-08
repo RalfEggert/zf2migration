@@ -74,7 +74,7 @@ class ArticleTable extends TableGateway
         $select = $this->getSql()->select();
         $select->order('article_date DESC');
 
-        return $this->selectWith($select)->current();
+        return $this->selectWith($select);
     }
 
     /**
@@ -89,7 +89,7 @@ class ArticleTable extends TableGateway
         $select->where->equalTo('article_status', 'approved');
         $select->order('article_date DESC');
 
-        return $this->selectWith($select)->current();
+        return $this->selectWith($select);
     }
 
     /**
@@ -104,7 +104,7 @@ class ArticleTable extends TableGateway
         $select->where->equalTo('article_status', 'approved');
         $select->order('article_date DESC');
 
-        return $this->selectWith($select)->current();
+        return $this->selectWith($select);
     }
 
     /**
@@ -118,7 +118,7 @@ class ArticleTable extends TableGateway
         $select->where->equalTo('article_status', $status);
         $select->order('article_date DESC');
 
-        return $this->selectWith($select)->current();
+        return $this->selectWith($select);
     }
 
 }

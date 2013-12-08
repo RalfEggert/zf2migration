@@ -135,12 +135,10 @@ return array(
             'Blog\Entity\Category' => 'Blog\Entity\CategoryEntity',
         ),
         'factories'  => array(
-            'Blog\Table\Article'  => 'Blog\Table\ArticleTableFactory',
-            'Blog\Table\Category' => 'Blog\Table\CategoryTableFactory',
-        ),
-        'services'   => array(
-            'Blog\Service\Article'  => \Blog_Service_Article::getInstance(),
-            'Blog\Service\Category' => \Blog_Service_Category::getInstance(),
+            'Blog\Table\Article'    => 'Blog\Table\ArticleTableFactory',
+            'Blog\Table\Category'   => 'Blog\Table\CategoryTableFactory',
+            'Blog\Service\Article'  => 'Blog\Service\ArticleServiceFactory',
+            'Blog\Service\Category' => 'Blog\Service\CategoryServiceFactory',
         ),
     ),
     'hydrators'       => array(
@@ -153,6 +151,14 @@ return array(
         'factories' => array(
             'Blog\Controller\Index' => 'Blog\Controller\IndexControllerFactory',
             'Blog\Controller\Admin' => 'Blog\Controller\AdminControllerFactory',
+        ),
+    ),
+    'form_elements'   => array(
+        'invokables' => array(
+            'Blog\Form\Category' => 'Blog\Form\CategoryForm',
+        ),
+        'factories'  => array(
+            'Blog\Form\Article' => 'Blog\Form\ArticleFormFactory',
         ),
     ),
     'translator'      => array(

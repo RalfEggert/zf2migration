@@ -37,6 +37,8 @@ abstract class PrefixHydrator extends ClassMethods
                 'No prefix is set for the PrefixHydrator!'
             );
         }
+
+        parent::__construct();
     }
 
     /**

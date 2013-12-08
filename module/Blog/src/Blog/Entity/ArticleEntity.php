@@ -109,9 +109,9 @@ class ArticleEntity
     /**
      * Set article user
      *
-     * @param User_Model_User $user
+     * @param $user
      */
-    public function setUser(User_Model_User $user)
+    public function setUser($user)
     {
         $this->_user = $user;
     }
@@ -129,9 +129,9 @@ class ArticleEntity
     /**
      * Set article category
      *
-     * @param CategoryEntity $category
+     * @param $category
      */
-    public function setCategory(CategoryEntity $category)
+    public function setCategory($category)
     {
         $this->_category = $category;
     }
@@ -255,29 +255,5 @@ class ArticleEntity
     {
         return $this->_count;
     }
-    
-    /**
-     * Convert model data to array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $data = array(
-            'article_id'            => $this->getId(),
-            'article_date'          => $this->getDate(),
-            'article_status'        => $this->getStatus(),
-            'article_user'          => $this->getUser()->toArray(),
-            'article_category'      => $this->getCategory()->toArray(),
-            'article_title'         => $this->getTitle(),
-            'article_teaser'        => $this->getTeaser(),
-            'article_text'          => $this->getText(),
-            'article_url'           => $this->getUrl(),
-            'article_count'         => $this->getCount(),
-        );
-    
-        return $data;
-    }
-
 }
 

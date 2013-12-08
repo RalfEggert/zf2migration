@@ -12,6 +12,8 @@
  */
 namespace Blog\Controller;
 
+use Blog\Service\ArticleService;
+use Blog\Service\CategoryService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -23,11 +25,11 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController
 {
     /**
-     * @var \Blog_Service_Article
+     * @var ArticleService
      */
     protected $articleService = null;
     /**
-     * @var \Blog_Service_Category
+     * @var CategoryService
      */
     protected $categoryService = null;
     /**
@@ -41,8 +43,8 @@ class IndexController extends AbstractActionController
      * @param $userService
      */
     function __construct(
-        \Blog_Service_Article $articleService,
-        \Blog_Service_Category $categoryService,
+        ArticleService $articleService,
+        CategoryService $categoryService,
         \User_Service_User $userService
     ) {
         $this->setArticleService($articleService);
@@ -72,30 +74,20 @@ class IndexController extends AbstractActionController
             }
         }
 
-        $articleList  = $this->getArticleService()->fetchListByCategory(
+        $articleList  = $this->getArticleService()->fetchManyByCategory(
             $category->getId(), $page
         );
-        $pageHandling = $this->getArticleService()->pageListByCategory(
-            $category->getId(), $page
-        );
-
-        if (empty($articleList) && $page > 0) {
-            return $this->redirect()->toRoute(
-                'blog-category', array('url' => $category->getUrl()), true
-            );
-        }
 
         return new ViewModel(
             array(
                 'category'     => $category,
                 'articleList'  => $articleList,
-                'pageHandling' => $pageHandling,
             )
         );
     }
 
     /**
-     * @return \Blog_Service_Article
+     * @return ArticleService
      */
     public function getArticleService()
     {
@@ -103,7 +95,7 @@ class IndexController extends AbstractActionController
     }
 
     /**
-     * @param \Blog_Service_Article $articleService
+     * @param ArticleService $articleService
      */
     public function setArticleService($articleService)
     {
@@ -111,7 +103,7 @@ class IndexController extends AbstractActionController
     }
 
     /**
-     * @return \Blog_Service_Category
+     * @return CategoryService
      */
     public function getCategoryService()
     {
@@ -119,7 +111,7 @@ class IndexController extends AbstractActionController
     }
 
     /**
-     * @param \Blog_Service_Category $categoryService
+     * @param CategoryService $categoryService
      */
     public function setCategoryService($categoryService)
     {
@@ -151,17 +143,13 @@ class IndexController extends AbstractActionController
     {
         $page = $this->params()->fromRoute('page');
 
-        $articleList  = $this->getArticleService()->fetchListApproved($page);
-        $pageHandling = $this->getArticleService()->pageListApproved($page);
-
-        if (empty($articleList) && $page > 0) {
-            return $this->redirect()->toRoute('blog', array(), true);
-        }
+        $articleList = $this->getArticleService()->fetchManyByStatus(
+            'approved'
+        );
 
         return new ViewModel(
             array(
                 'articleList'  => $articleList,
-                'pageHandling' => $pageHandling,
             )
         );
     }
@@ -216,24 +204,14 @@ class IndexController extends AbstractActionController
             }
         }
 
-        $articleList  = $this->getArticleService()->fetchListByUser(
-            $user->getId(), $page
+        $articleList  = $this->getArticleService()->fetchManyByUser(
+            $user->getId()
         );
-        $pageHandling = $this->getArticleService()->pageListByUser(
-            $user->getId(), $page
-        );
-
-        if (empty($articleList) && $page > 0) {
-            return $this->redirect()->toRoute(
-                'blog-user', array('url' => $user->getUrl()), true
-            );
-        }
 
         return new ViewModel(
             array(
                 'user'         => $user,
                 'articleList'  => $articleList,
-                'pageHandling' => $pageHandling,
             )
         );
     }
